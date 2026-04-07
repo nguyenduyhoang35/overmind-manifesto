@@ -10,10 +10,10 @@
 
 ## Read the Manifesto
 
-| Language | Manifesto | Properties |
-|----------|-----------|------------|
-| English | [manifesto.md](en/manifesto.md) | [properties.md](en/properties.md) |
-| Tiếng Việt | [manifesto.md](vi/manifesto.md) | [properties.md](vi/properties.md) |
+| Language | Manifesto | Properties | Skill Templates |
+|----------|-----------|------------|-----------------|
+| English | [manifesto.md](en/manifesto.md) | [properties.md](en/properties.md) | [skill-templates.md](en/skill-templates.md) |
+| Tiếng Việt | [manifesto.md](vi/manifesto.md) | [properties.md](vi/properties.md) | [skill-templates.md](vi/skill-templates.md) |
 
 ## Core Idea
 
