@@ -66,6 +66,14 @@ Error rate giảm asymptotically theo knowledge accumulation. Improvement lớn 
 
 Không bao giờ đạt 0% error — nhưng mỗi error mới trở thành error cuối cùng thuộc loại đó.
 
+## Knowledge decay
+
+Knowledge có hạn sử dụng — đặc biệt knowledge gắn với external systems, third-party APIs, regulatory environments, hoặc thị trường biến động nhanh. Rule đúng 6 tháng trước có thể âm thầm trở nên sai.
+
+Retro là cơ chế detect tự nhiên: khi AI follow rule đúng mà output vẫn sai, rule đã decay. Hệ thống không cần "knowledge review process" riêng — feedback loop đã surface stale knowledge thông qua execution failures.
+
+Hệ quả: knowledge gắn với external systems nên có freshness markers ("verified [date], [version]"). Khi context thay đổi, bạn biết knowledge nào cần recheck trước — không cần audit toàn bộ.
+
 ## Portable across projects
 
 Knowledge applicable cho project mới mang theo được. Constraints, conventions, decisions, failure patterns — nhiều thứ transcend project cụ thể.

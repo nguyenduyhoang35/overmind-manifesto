@@ -66,6 +66,14 @@ Error rate decreases asymptotically with knowledge accumulation. Large improveme
 
 You never reach 0% error — but each new error becomes the last of its kind.
 
+## Knowledge Decay
+
+Knowledge has a shelf life — especially knowledge tied to external systems, third-party APIs, regulatory environments, or fast-moving markets. A rule that was correct 6 months ago may silently become wrong.
+
+Retro is the natural detection mechanism: when AI follows a rule exactly and the output is still wrong, the rule has decayed. The system doesn't need a separate "knowledge review process" — the feedback loop already surfaces stale knowledge through execution failures.
+
+Corollary: knowledge tied to external systems should carry freshness markers ("verified [date], [version]"). When context shifts, you know which knowledge to recheck first — without auditing everything.
+
 ## Portable Across Projects
 
 Applicable knowledge carries over to new projects. Constraints, conventions, decisions, failure patterns — many things transcend a specific project.

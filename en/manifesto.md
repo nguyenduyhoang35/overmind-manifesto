@@ -124,6 +124,18 @@ This is what transforms the system from static to living. Every time AI executes
 
 The system doesn't get smarter because of a newer model. The system gets smarter because **every mistake is encoded as knowledge** for next time.
 
+### Knowledge Decay: When Rules Go Stale
+
+Knowledge accumulates — but it also decays. An API behavior documented 6 months ago may have changed. A business rule encoded in iteration 3 may have been superseded by a new regulation. Knowledge tied to external systems is especially fragile.
+
+You don't need a complex system to handle this. Three simple practices:
+
+**Retro is the natural decay detector.** When AI follows a rule correctly but the output is still wrong — that's the signal. The rule is outdated, not the AI. Retro should always ask: "did any existing rule lead us astray?"
+
+**Mark external knowledge with freshness.** Knowledge that depends on external systems (API behaviors, third-party tool versions, regulatory requirements) should note when it was last verified: "Shopee webhook delay: 5-30 seconds (verified 2025-01-15, API v2.3)." When context changes — new API version, new regulation — you know which knowledge to recheck first.
+
+**Simple principle:** if AI follows the rule exactly and the output is still wrong → the rule needs updating, not the AI.
+
 ---
 
 ## The Loop
@@ -225,6 +237,40 @@ Same pattern in every field: **humans shift from executor to knowledge owner + q
 The difference between a team that uses AI poorly and a team that uses AI well: the poor team has 1 person prompting AI. The good team has **everyone contributing knowledge** to the same knowledge store — business analysts contribute business rules, developers contribute technical constraints, testers contribute failure patterns, domain experts contribute domain knowledge, operations contribute real-world behaviors.
 
 AI uses all of that knowledge to execute. The more perspectives, the more comprehensive the knowledge, the more accurate the output. Knowledge isn't one person's responsibility — it's the team's shared asset.
+
+---
+
+## Knowledge Governance
+
+When only 1 person contributes knowledge, governance is trivial. When 10 people contribute, conflicts emerge. Two people encode contradictory rules. Someone updates a decision without recording the reason. Knowledge accumulates but nobody knows which parts are still trustworthy.
+
+This section isn't a governance framework — it's 3 lightweight principles that prevent the most common problems without adding bureaucracy.
+
+### Ownership
+
+Each knowledge area has 1 owner. Business rules → BA or product owner. Technical constraints → tech lead. Failure patterns → whoever runs retros.
+
+The owner doesn't approve every entry — that would be a bottleneck. The owner is the **last resort when conflict arises.** Most knowledge enters the store without conflict. The owner only activates when two rules contradict each other or when someone challenges an existing rule.
+
+### Conflict Resolution
+
+When two rules contradict:
+
+1. The rule with **clearer context wins** — context means: reason recorded, evidence attached, source identified. "Use Redis because we need TTL + shared cache across instances" beats "use Memcached" with no reason.
+2. If context quality is equal → **escalate to the area owner.** Owner decides, records the reasoning, updates the losing rule.
+3. The resolved conflict itself becomes knowledge — record what was contradictory and why one rule won. This prevents the same conflict from resurfacing.
+
+### Change Traceability
+
+When knowledge changes, record what it replaces:
+
+```
+"All monetary calculations must use currency-specific decimal precision."
+Replaces: "Use 2 decimal places for all monetary values" (iteration 14)
+Reason: JPY uses 0 decimals, BHD uses 3. Discovered during payment module implementation.
+```
+
+Not every change needs this level of detail. Use it when the previous rule was **actively being followed** — so people who learned the old rule understand why it changed.
 
 ---
 
